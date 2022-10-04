@@ -96,16 +96,11 @@ class LYMultiImageStreamCompleter extends ImageStreamCompleter {
     _timer = null;
     _framesEmitted = 0;
     _frameCallbackScheduled = false;
-
-    /// 容错，同下
-    Timer(const Duration(milliseconds: 300), () {
-      _handleCodecReady(codec);
-    });
+    _handleCodecReady(codec);
   }
 
   void _handleCodecReady(ui.Codec codec) {
     _codec = codec;
-
     if (hasListeners) {
       _decodeNextFrameAndSchedule();
     }
@@ -159,8 +154,8 @@ class LYMultiImageStreamCompleter extends ImageStreamCompleter {
   Future<void> _decodeNextFrameAndSchedule() async {
     // This will be null if we gave it away. If not, it's still ours and it
     // must be disposed of.
-    // _nextFrame?.image.dispose();
-    // _nextFrame = null;
+    _nextFrame?.image.dispose();
+    _nextFrame = null;
     try {
       _nextFrame = await _codec!.getNextFrame();
     } catch (exception, stack) {
