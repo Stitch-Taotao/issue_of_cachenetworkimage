@@ -70,13 +70,20 @@ class _SecondePageState extends State<SecondePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: ListView.builder(
-        key: UniqueKey(),
-        itemBuilder: (context, index) {
-          final id = ids[index];
-          return LYAvatarWidget(src: id);
-        },
-        itemCount: ids.length,
+      body: Column(
+        children: [
+          Image.network("https://img2.baidu.com/it/u=4147884680,3389833900&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500"),
+          Expanded(
+            child: ListView.builder(
+              key: UniqueKey(),
+              itemBuilder: (context, index) {
+                final id = ids[index];
+                return LYAvatarWidget(src: id);
+              },
+              itemCount: ids.length,
+            ),
+          ),
+        ],
       ),
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
